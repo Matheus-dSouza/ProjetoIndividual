@@ -1,0 +1,83 @@
+@import url(https://db.onlinewebfonts.com/c/11b9313c156261bdee0bc8b745b34450?family=DwarvenAxe+BB+W00+Regular); 
+
+body {
+    margin: 0;
+}
+
+.navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #560a03;
+    align-content: space-between;
+    column-gap: 15%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 100%;
+}
+
+a {
+    font-family: "DwarvenAxe BB W00 Regular";
+    font-size: 30px;
+    color: black;
+    text-decoration: none;
+}
+
+.main-index {
+    display: flex;
+    position: relative;
+    text-align: center;
+    overflow: hidden;
+}
+
+.top.hamlet-text {
+    position: absolute;
+    width: 100%;
+    padding-top: 5%;
+    justify-self: center;
+    font-family: "DwarvenAxe BB W00 Regular";
+    font-size: 40px;
+    color: #ebdfd5;
+    text-shadow: 2px 2px black;
+}
+
+.middle.hamlet-text {
+    position: absolute;
+    width: 40%;
+    padding-left: 30%;
+    text-align: center;
+    align-self: center;
+    justify-self: center;
+    font-family: "DwarvenAxe BB W00 Regular";
+    font-size: 25px;
+    color: #ebdfd5;
+    text-shadow: 2px 2px black;
+}
+
+#navbar-icon {
+    width: 100px;
+    content: url(assets/dd-torch.png);
+}
+
+#hamlet {
+    width: 100%;
+    margin-right: 0;
+    height: auto;
+    content: url(assets/dd-hamlet.webp);
+}
+
+#graveyardkeeper {
+    content: url(assets/dd-graveyard.webp);
+    position: absolute;
+    width: 20%;
+    top: 50%;
+}
+
+#blacksmith {
+    content: url(assets/dd-blacksmith.webp);
+    position: absolute;
+    width: 25%;
+    top: 50%;
+    left: 78%;
+    transform: scaleX(-1);
+}
