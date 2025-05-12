@@ -4,7 +4,11 @@ body {
     margin: 0;
 }
 
+/* NAVBAR */
+
 .navbar {
+    position:sticky;
+    top:0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -18,66 +22,73 @@ body {
 
 a {
     font-family: "DwarvenAxe BB W00 Regular";
-    font-size: 30px;
+    font-size: 25px;
     color: black;
     text-decoration: none;
 }
 
-.main-index {
+.active {
+    color: #ebdfd5;
+}
+
+/* INDEX */
+
+.index-main {
     display: flex;
-    position: relative;
-    text-align: center;
-    overflow: hidden;
+    height: 100vh;
+    flex-direction: column;
+    background-color: #3e0909;
 }
 
-.top.hamlet-text {
-    position: absolute;
-    width: 100%;
-    padding-top: 5%;
-    justify-self: center;
+.index-text {
     font-family: "DwarvenAxe BB W00 Regular";
-    font-size: 40px;
     color: #ebdfd5;
     text-shadow: 2px 2px black;
 }
 
-.middle.hamlet-text {
-    position: absolute;
-    width: 40%;
-    padding-left: 30%;
-    text-align: center;
-    align-self: center;
-    justify-self: center;
-    font-family: "DwarvenAxe BB W00 Regular";
-    font-size: 25px;
-    color: #ebdfd5;
-    text-shadow: 2px 2px black;
+.index-text.top {
+    padding-top: 3%;
+    font-size: 35px;
 }
 
 #navbar-icon {
-    width: 100px;
+    width: 70px;
     content: url(assets/dd-torch.png);
 }
 
-#hamlet {
-    width: 100%;
-    margin-right: 0;
-    height: auto;
-    content: url(assets/dd-hamlet.webp);
+.block1 {
+    display: flex;
+    padding-top: 100px;
+    padding-right: 10%;
+    justify-content: space-between;
+    background-image: url(assets/dd-ruins.png);
+    background-size: 100%;
+    background-repeat: no-repeat;
 }
 
-#graveyardkeeper {
-    content: url(assets/dd-graveyard.webp);
-    position: absolute;
-    width: 20%;
-    top: 50%;
+#index-necromancer {
+    content: url(assets/dd-necromancer.gif);
 }
 
-#blacksmith {
-    content: url(assets/dd-blacksmith.webp);
-    position: absolute;
-    width: 25%;
-    top: 50%;
-    left: 78%;
-    transform: scaleX(-1);
+#index-vestal {
+    content: url(assets/dd-vestal-combat.gif);
+    padding-top: 110px;
+    padding-bottom: 15px;
+}
+
+#index-pd {
+    content: url(assets/dd-pd-combat.gif);
+    padding-top: 110px;
+    padding-bottom: 15px;
+}
+
+#index-hwm {
+    content: url(assets/dd-hwm-combat.gif);
+    padding-top: 110px;
+    padding-bottom: 15px;
+}
+
+#index-crusader {
+    content: url(assets/dd-crusader-combat.gif);
+    padding-bottom: 15px;
 }
