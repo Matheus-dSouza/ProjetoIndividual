@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <div class="navbar">
+        <a href="index.html">Início</a>
+        <a class="active" href="cadastro.html">Cadastro</a>
+        <a href="#"><img id="navbar-icon"></a>
+        <a href="login.html">Login</a>
+        <a href="historico.html">Histórico</a>
+    </div>
+
+    <div class="cadastro-main">
+        <div class="block3">
+            <img id="cadastro-ancestor">
+        </div>
+        <div class="block4">
+            <label for="ipt_nome_cadastro">Digite seu nome:</label> <br>
+            <input type="text" id="ipt_nome_cadastro"> <br>
+            <label for="ipt_email_cadastro">Digite seu email:</label> <br>
+            <input type="text" id="ipt_email_cadastro"> <br>
+            <label for="ipt_senha_cadastro">Digite sua senha:</label> <br>
+            <input type="password" id="ipt_senha_cadastro"> <br>
+            <label for="ipt_heroi_cadastro">Escolha seu herói favorito:</label> <br>
+            <select name="herois" id="herois" required>
+                <option value="abomination">Abomination</option>
+                <option value="antiquarian">Antiquarian</option>
+                <option value="arbalest">Arbalest</option>
+                <option value="bounty-hunter">Bounty Hunter</option>
+                <option value="crusader">Crusader</option>
+                <option value="flagellant">Flagellant</option>
+                <option value="grave-robber">Grave Robber</option>
+                <option value="hellion">Hellion</option>
+                <option value="highwayman">Highwayman</option>
+                <option value="houndmaster">Houndmaster</option>
+                <option value="jester">Jester</option>
+                <option value="leper">Leper</option>
+                <option value="man-at-arms">Man-at-Arms</option>
+                <option value="musketeer">Musketeer</option>
+                <option value="occultist">Occultist</option>
+                <option value="plague-doctor">Plague Doctor</option>
+                <option value="shieldbreaker">Shieldbreaker</option>
+                <option value="vestal">Vestal</option>
+            </select> <br> <br>
+            <button onclick="cadastrar()">Cadastrar</button>
+        </div>
+    </div>
+</body>
+
+</html>
