@@ -31,13 +31,30 @@ a {
     color: #ebdfd5;
 }
 
+#navbar-icon {
+    width: 70px;
+    content: url(assets/dd-torch.png);
+}
+
+
 /* INDEX */
 
 .index-main {
     display: flex;
-    height: 100vh;
     flex-direction: column;
     background-color: #3e0909;
+}
+
+.index-hamlet {
+    width: 50vw;
+    height: 10vh;
+}
+
+.index-stage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .index-text {
@@ -47,43 +64,57 @@ a {
 }
 
 .index-text.top {
-    padding-top: 3%;
     font-size: 35px;
+    align-self: center;
 }
 
-#navbar-icon {
-    width: 70px;
-    content: url(assets/dd-torch.png);
+.index-text.middle {
+    padding-top: 10%;
+    padding-bottom: 20%;
+    font-size: 25px;
+    align-self: center;
+    text-align: center;
+}
+
+.index-text.hamlet {
+    font-size: 35px;
+    padding-top: 10%;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.index-text.hamlet-small {
+    font-size: 25px;
+    padding-left: 5%;
+    padding-right: 5%;
 }
 
 .block1 {
     display: flex;
-    padding-top: 100px;
-    padding-right: 10%;
+    background-image: url(assets/dd-hamlet-broken.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding-bottom: 45%;
+}
+
+.block2 {
+    display: flex;
+    padding-right: 12%;
     justify-content: space-between;
     background-image: url(assets/dd-ruins.png);
-    background-size: 100%;
+    background-size: cover;
     background-repeat: no-repeat;
+    padding-top: 100px;
 }
 
 #index-necromancer {
     content: url(assets/dd-necromancer.gif);
+    padding-right: 4%;
 }
 
 #index-vestal {
     content: url(assets/dd-vestal-combat.gif);
-    padding-top: 110px;
-    padding-bottom: 15px;
-}
-
-#index-pd {
-    content: url(assets/dd-pd-combat.gif);
-    padding-top: 110px;
-    padding-bottom: 15px;
-}
-
-#index-hwm {
-    content: url(assets/dd-hwm-combat.gif);
+    padding-left: 10%;
     padding-top: 110px;
     padding-bottom: 15px;
 }
@@ -91,4 +122,5 @@ a {
 #index-crusader {
     content: url(assets/dd-crusader-combat.gif);
     padding-bottom: 15px;
+    padding-left: 4%;
 }
