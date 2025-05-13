@@ -33,7 +33,7 @@ a {
 
 #navbar-icon {
     width: 70px;
-    content: url(/assets/dd-torch.png);
+    content: url(/public/assets/dd-torch.png);
 }
 
 
@@ -91,7 +91,7 @@ a {
 
 .block1 {
     display: flex;
-    background-image: url(/assets/dd-hamlet-broken.png);
+    background-image: url(/public/assets/dd-hamlet-broken.png);
     background-size: cover;
     background-repeat: no-repeat;
     padding-bottom: 45%;
@@ -101,7 +101,7 @@ a {
     display: flex;
     padding-right: 12%;
     justify-content: space-between;
-    background-image: url(/assets/dd-ruins.png);
+    background-image: url(/public/assets/dd-ruins.png);
     background-size: cover;
     background-repeat: no-repeat;
     padding-top: 100px;
@@ -113,19 +113,19 @@ a {
 }
 
 #index-necromancer {
-    content: url(/assets/dd-necromancer.gif);
+    content: url(/public/assets/dd-necromancer.gif);
     padding-right: 4%;
 }
 
 #index-vestal {
-    content: url(/assets/dd-vestal-combat.gif);
+    content: url(/public/assets/dd-vestal-combat.gif);
     padding-left: 10%;
     padding-top: 110px;
     padding-bottom: 15px;
 }
 
 #index-crusader {
-    content: url(/assets/dd-crusader-combat.gif);
+    content: url(/public/assets/dd-crusader-combat.gif);
     padding-bottom: 15px;
     padding-left: 4%;
 }
