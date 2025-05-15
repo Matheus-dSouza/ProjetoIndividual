@@ -1,4 +1,4 @@
-create if not exists database ProjetoIndividual;
+create database if not exists ProjetoIndividual;
 use ProjetoIndividual;
 
 create table heroi (
@@ -16,3 +16,25 @@ fkheroi		int,
 primary key	(id),
 foreign key fkheroi (fkheroi) references heroi (id)
 ) auto_increment=1 ;
+
+insert into heroi (nome)
+values  ('Abomination'),
+        ('Antiquarian'),
+        ('Arbalest'),
+        ('Bounty Hunter'),
+        ('Crusader'),
+        ('Flagellant'),
+        ('Grave Robber'),
+        ('Hellion'),
+        ('Highwayman'),
+        ('Houndmaster'),
+        ('Jester'),
+        ('Leper'),
+        ('Man-at-Arms'),
+        ('Musketeer'),
+        ('Occultist'),
+        ('Plague Doctor'),
+        ('Shieldbreaker'),
+        ('Vestal');
+        
+select * from usuario;

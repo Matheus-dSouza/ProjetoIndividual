@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro</title>
-    <link rel="stylesheet" href="/public/css/style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
@@ -35,25 +35,25 @@
             <label for="ipt_senha_cadastro" placeholder="*******">Digite sua senha:</label> <br>
             <input type="password" id="ipt_senha_cadastro"> <br>
             <label for="ipt_heroi_cadastro">Escolha seu herói favorito:</label> <br>
-            <select name="herois" id="herois" required>
-                <option value="abomination">Abomination</option>
-                <option value="antiquarian">Antiquarian</option>
-                <option value="arbalest">Arbalest</option>
-                <option value="bounty-hunter">Bounty Hunter</option>
-                <option value="crusader">Crusader</option>
-                <option value="flagellant">Flagellant</option>
-                <option value="grave-robber">Grave Robber</option>
-                <option value="hellion">Hellion</option>
-                <option value="highwayman">Highwayman</option>
-                <option value="houndmaster">Houndmaster</option>
-                <option value="jester">Jester</option>
-                <option value="leper">Leper</option>
-                <option value="man-at-arms">Man-at-Arms</option>
-                <option value="musketeer">Musketeer</option>
-                <option value="occultist">Occultist</option>
-                <option value="plague-doctor">Plague Doctor</option>
-                <option value="shieldbreaker">Shieldbreaker</option>
-                <option value="vestal">Vestal</option>
+            <select name="herois" id="ipt_heroi_cadastro" required>
+                <option value="1">Abomination</option>
+                <option value="2">Antiquarian</option>
+                <option value="3">Arbalest</option>
+                <option value="4">Bounty Hunter</option>
+                <option value="5">Crusader</option>
+                <option value="6">Flagellant</option>
+                <option value="7">Grave Robber</option>
+                <option value="8">Hellion</option>
+                <option value="9">Highwayman</option>
+                <option value="10">Houndmaster</option>
+                <option value="11">Jester</option>
+                <option value="12">Leper</option>
+                <option value="13">Man-at-Arms</option>
+                <option value="14">Musketeer</option>
+                <option value="15">Occultist</option>
+                <option value="16">Plague Doctor</option>
+                <option value="17">Shieldbreaker</option>
+                <option value="18">Vestal</option>
             </select> <br> <br>
             <button onclick="cadastrar()">Cadastrar</button>
         </div>
@@ -72,18 +72,18 @@
         var nomeVar = ipt_nome_cadastro.value;
         var emailVar = ipt_email_cadastro.value;
         var senhaVar = ipt_senha_cadastro.value;
+        var heroiVar = ipt_heroi_cadastro.value;
 
         // Verificando se há algum campo em branco
         if (
             nomeVar == "" ||
             emailVar == "" ||
-            senhaVar == ""
+            senhaVar == "" ||
+            heroiVar == ""
         ) {
             cardErro.style.display = "block";
             mensagem_erro.innerHTML =
                 "(Mensagem de erro para todos os campos em branco)";
-
-            finalizarAguardar();
             return false;
         } else {
             setInterval(sumirMensagem, 5000);
@@ -100,7 +100,8 @@
                 // Agora vá para o arquivo routes/usuario.js
                 nomeServer: nomeVar,
                 emailServer: emailVar,
-                senhaServer: senhaVar
+                senhaServer: senhaVar,
+                heroiServer: heroiVar
             }),
         })
             .then(function (resposta) {
@@ -115,16 +116,12 @@
                     setTimeout(() => {
                         window.location = "login.html";
                     }, "2000");
-
-                    limparFormulario();
-                    finalizarAguardar();
                 } else {
                     throw "Houve um erro ao tentar realizar o cadastro!";
                 }
             })
             .catch(function (resposta) {
                 console.log(`#ERRO: ${resposta}`);
-                finalizarAguardar();
             });
 
         return false;
