@@ -1,7 +1,7 @@
-var avisoModel = require("../models/avisoModel");
+var avisoModel = require("../models/comentarioModel");
 
 function listar(req, res) {
-    avisoModel.listar().then(function (resultado) {
+    comentarioModel.listar().then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -39,10 +39,10 @@ function listarPorUsuario(req, res) {
         );
 }
 
-function pesquisarDescricao(req, res) {
-    var descricao = req.params.descricao;
+function pesquisarComentario(req, res) {
+    var comentario = req.params.comentario;
 
-    avisoModel.pesquisarDescricao(descricao)
+    comentarioModel.pesquisarDescricao(comentario)
         .then(
             function (resultado) {
                 if (resultado.length > 0) {
@@ -61,18 +61,15 @@ function pesquisarDescricao(req, res) {
 }
 
 function publicar(req, res) {
-    var titulo = req.body.titulo;
-    var descricao = req.body.descricao;
+    var comentario = req.body.comentario;
     var idUsuario = req.params.idUsuario;
 
-    if (titulo == undefined) {
-        res.status(400).send("O título está indefinido!");
-    } else if (descricao == undefined) {
-        res.status(400).send("A descrição está indefinido!");
+    if (conteudo == undefined) {
+        res.status(400).send("O conteúdo está indefinido!");
     } else if (idUsuario == undefined) {
         res.status(403).send("O id do usuário está indefinido!");
     } else {
-        avisoModel.publicar(titulo, descricao, idUsuario)
+        comentarioModel.publicar(comentario, idUsuario)
             .then(
                 function (resultado) {
                     res.json(resultado);
@@ -89,10 +86,10 @@ function publicar(req, res) {
 }
 
 function editar(req, res) {
-    var novaDescricao = req.body.descricao;
-    var idAviso = req.params.idAviso;
+    var novoConteudo = req.body.comentario;
+    var idComentario = req.params.idComentario;
 
-    avisoModel.editar(novaDescricao, idAviso)
+    avisoModel.editar(novoConteudo, idComentario)
         .then(
             function (resultado) {
                 res.json(resultado);
@@ -109,9 +106,9 @@ function editar(req, res) {
 }
 
 function deletar(req, res) {
-    var idAviso = req.params.idAviso;
+    var idComentario = req.params.idComentario;
 
-    avisoModel.deletar(idAviso)
+    comentarioModel.deletar(idComentario)
         .then(
             function (resultado) {
                 res.json(resultado);
@@ -129,7 +126,7 @@ function deletar(req, res) {
 module.exports = {
     listar,
     listarPorUsuario,
-    pesquisarDescricao,
+    pesquisarComentario,
     publicar,
     editar,
     deletar

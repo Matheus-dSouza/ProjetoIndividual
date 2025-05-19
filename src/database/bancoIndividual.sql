@@ -17,6 +17,14 @@ primary key	(id),
 foreign key fkheroi (fkheroi) references heroi (id)
 ) auto_increment=1 ;
 
+create table comentario (
+id          int auto_increment,
+conteudo    varchar(120),
+fkusuario   int,
+primary key (id),
+foreign key fkusuario (fkusuario) references usuario (id)
+) auto_increment=1 ;
+
 insert into heroi (nome)
 values  ('Abomination'),
         ('Antiquarian'),
@@ -36,5 +44,3 @@ values  ('Abomination'),
         ('Plague Doctor'),
         ('Shieldbreaker'),
         ('Vestal');
-        
-select * from usuario;
