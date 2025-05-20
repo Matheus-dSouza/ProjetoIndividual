@@ -14,7 +14,8 @@ email		varchar(60),
 senha		varchar(60),
 fkheroi		int,
 primary key	(id),
-foreign key fkheroi (fkheroi) references heroi (id)
+foreign key fkheroi (fkheroi) references heroi (id),
+unique  key (email)
 ) auto_increment=1 ;
 
 create table comentario (

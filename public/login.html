@@ -25,6 +25,9 @@
     </div>
 
     <div class="login-main">
+        <div id="div_aguardar" class="loading-div"></div>
+        <div id="div_erros_login"></div>
+
         <div class="block5">
             <img id="login-town-event">
         </div>
@@ -37,22 +40,18 @@
         </div>
     </div>
 
-    <div id="div_aguardar" class="loading-div"></div>
-    <div id="div_erros_login"></div>
 </body>
 
 </html>
 
 <script>
     function entrar() {
-        aguardar();
         var emailVar = ipt_email_login.value;
         var senhaVar = ipt_senha_login.value;
 
         if (emailVar == "" || senhaVar == "") {
             cardErro.style.display = "block"
             mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
-            finalizarAguardar();
             return false;
         }
         else {
@@ -83,11 +82,6 @@
                     sessionStorage.EMAIL_USUARIO = json.email;
                     sessionStorage.NOME_USUARIO = json.nome;
                     sessionStorage.ID_USUARIO = json.id;
-
-                    setTimeout(function () {
-                        window.location = "./dashboard/cards.html";
-                    }, 1000); // apenas para exibir o loading
-
                 });
 
             } else {
@@ -96,7 +90,6 @@
 
                 resposta.text().then(texto => {
                     console.error(texto);
-                    finalizarAguardar(texto);
                 });
             }
 
