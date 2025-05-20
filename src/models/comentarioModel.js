@@ -86,7 +86,7 @@ function deletar(idComentario) {
 module.exports = {
     listar,
     listarPorUsuario,
-    pesquisarDescricao,
+    pesquisarComentario,
     publicar,
     editar,
     deletar
