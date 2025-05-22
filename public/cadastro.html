@@ -18,11 +18,11 @@
     </div>
 
     <div class="alerta_erro">
-      <div class="card_erro" id="cardErro">
-        <span id="mensagem_erro"></span>
-      </div>
+        <div class="card_erro" id="cardErro">
+            <span id="mensagem_erro"></span>
+        </div>
     </div>
-    
+
     <div class="cadastro-main">
         <div class="block3">
             <img id="cadastro-ancestor">
@@ -58,6 +58,10 @@
             <button onclick="cadastrar()">Cadastrar</button>
         </div>
     </div>
+
+    <div id="div_aguardar" class="loading-div">
+        <img src="assets/circle-loading.gif" id="loading-gif" />
+    </div>
 </body>
 
 </html>
@@ -83,7 +87,7 @@
         ) {
             cardErro.style.display = "block";
             mensagem_erro.innerHTML =
-                "(Mensagem de erro para todos os campos em branco)";
+                "(Mensagem de erro para campos em branco)";
             return false;
         } else {
             setInterval(sumirMensagem, 5000);
@@ -116,6 +120,8 @@
                     setTimeout(() => {
                         window.location = "login.html";
                     }, "2000");
+
+                    limparFormulario();
                 } else {
                     throw "Houve um erro ao tentar realizar o cadastro!";
                 }
