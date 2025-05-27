@@ -9,7 +9,7 @@ router.get("/listarRank", function (req, res) {
 
 router.get("/listar", function (req, res) {
     dashboardController.listar(req, res);
-});
+})
 
 router.get("/listar/:idUsuario", function (req, res) {
     dashboardController.listarPorUsuario(req, res);

@@ -14,18 +14,13 @@ function listarRank() {
 }
 
 function listar() {
-    console.log("ACESSEI O DASHBOARD  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
     var instrucaoSql = `
-        SELECT c.id AS idComentario, c.conteudo, u.nome AS usuario
-        FROM comentario c
-        INNER JOIN usuario u ON c.fkusuario = u.id;
-    `;
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
-    return database.executar(instrucaoSql);
+    
+    `
 }
 
 function pesquisarComentario(texto) {
-    console.log("ACESSEI O DASHBOARD MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function pesquisarDescricao()");
+    // console.log("ACESSEI O DASHBOARD MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function pesquisarDescricao()");
     var instrucaoSql = `
         SELECT 
             c.id AS idComentario,
@@ -33,7 +28,7 @@ function pesquisarComentario(texto) {
             u.nome
         FROM comentario c
             INNER JOIN usuario u
-                ON c.fkusuario = u.id
+                ON c.fkusuario = u.idg
         WHERE c.conteudo LIKE '${texto}';
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
