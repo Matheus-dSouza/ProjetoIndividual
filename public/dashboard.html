@@ -9,7 +9,7 @@
     <script src="js/sessao.js"></script>
 </head>
 
-<body onload="validarSessao(), listarRank()">
+<body onload="validarSessao(), listarRank()" id="dashboard-body">
     <div class="navbar">
         <a href="index.html">Início</a>
         <a href="cadastro.html">Cadastro</a>
@@ -18,41 +18,45 @@
         <a class="active" href="dashboard.html">Dashboard</a>
     </div>
 
-    <div class="comentarios">
+    <div class="dashboard-main">
         <h3>Olá, <span id="b_usuario"></span></h3>
         <div class="btn-logout" onclick="limparSessao()">
             <h3>Sair</h3>
         </div>
         <div id="alerta">
         </div>
-        <div class="container">
-            <div id="div_ranking">
-                <div id="div_heroi"></div>
-                <div id="div_votos"></div>
-            </div>
-            <h1>Comentar</h1>
-            <div class="div-form">
-                <form id="form_postagem" method="post" onsubmit="return publicar()">
-                    <label>
-                        Título do comentário:
+
+        <div id="div_ranking">
+            <div id="div_heroi"></div>
+            <div id="div_votos"></div>
+        </div>
+
+        <div class="comentarios">
+            <div class="container">
+                <h1>Comentar</h1>
+                <div class="div-form">
+                    <form id="form_postagem" method="post" onsubmit="return publicar()">
+                        <label>
+                            Título do comentário:
+                            <br>
+                            <input name="titulo" id="titulo" maxlength="100" type="text">
+                        </label>
                         <br>
-                        <input name="titulo" id="titulo" maxlength="100" type="text">
-                    </label>
-                    <br>
-                    <br>
-                    <label>
-                        Conteúdo (máximo de 250 caracteres):
                         <br>
-                        <textarea name="descricao" id="textarea_descricao" maxlength="250" rows="5"></textarea>
-                    </label>
-                    <br>
-                    <br>
-                    <button>Enviar</button>
-                </form>
-            </div>
-            <h1>Seção de Comentários</h1>
-            <div class="div-results">
-                <div id="feed_container" class="feed-container">
+                        <label>
+                            Conteúdo (máximo de 250 caracteres):
+                            <br>
+                            <textarea name="descricao" id="textarea_descricao" maxlength="250" rows="5"></textarea>
+                        </label>
+                        <br>
+                        <br>
+                        <button>Enviar</button>
+                    </form>
+                </div>
+                <h1>Seção de Comentários</h1>
+                <div class="div-results">
+                    <div id="feed_container" class="feed-container">
+                    </div>
                 </div>
             </div>
         </div>
@@ -64,7 +68,6 @@
     b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
 
     function listarRank() {
-        console.log("Executando função de listagem do rank");
         fetch(`/dashboard/listarRank`, {
             method: "GET",
             headers: {
@@ -93,8 +96,10 @@
 
         var corpo = {
             titulo: form_postagem.titulo.value,
-            descricao: form_postagem.descricao.value
+            conteudo: form_postagem.descricao.value
         }
+
+        console.log(idUsuario)
 
         fetch(`/dashboard/publicar/${idUsuario}`, {
             method: "post",
@@ -103,12 +108,9 @@
             },
             body: JSON.stringify(corpo)
         }).then(function (resposta) {
-
-            console.log("resposta: ", resposta);
-
+            console.log(resposta);
             if (resposta.ok) {
                 window.alert("Post realizado com sucesso pelo usuario de ID: " + idUsuario + "!");
-                window.location = "/dashboard/dashboard.html";
                 limparFormulario();
             } else if (resposta.status == 404) {
                 window.alert("Deu 404!");
@@ -118,7 +120,6 @@
         }).catch(function (resposta) {
             console.log(`#ERRO: ${resposta}`);
         });
-
         return false;
     }
 

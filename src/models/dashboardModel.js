@@ -30,10 +30,7 @@ function pesquisarComentario(texto) {
         SELECT 
             c.id AS idComentario,
             c.conteudo,
-            u.id AS idUsuario,
-            u.nome,
-            u.email,
-            u.senha
+            u.nome
         FROM comentario c
             INNER JOIN usuario u
                 ON c.fkusuario = u.id
@@ -49,23 +46,20 @@ function listarPorUsuario(idUsuario) {
         SELECT 
             c.id AS idComentario,
             c.conteudo,
-            u.id AS idUsuario,
-            u.nome,
-            u.email,
-            u.senha
+            u.nome
         FROM comentario c
-            INNER JOIN usuario u
-                ON c.fkusuario = u.id
+        INNER JOIN usuario u
+        ON c.fkusuario = u.id
         WHERE u.id = ${idUsuario};
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
 
-function publicar(conteudo, idUsuario) {
-    console.log("ACESSEI O DASHBOARD MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function publicar(): ", titulo, descricao, idUsuario);
+function publicar(titulo, conteudo, idUsuario) {
+    // console.log("ACESSEI O DASHBOARD MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function publicar(): ", titulo, descricao, idUsuario);
     var instrucaoSql = `
-        INSERT INTO aviso (conteudo, fkusuario) VALUES ('${conteudo}', ${idUsuario});
+        INSERT INTO comentario (titulo, conteudo, fkusuario) VALUES ('${titulo}', '${conteudo}', ${idUsuario});
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);

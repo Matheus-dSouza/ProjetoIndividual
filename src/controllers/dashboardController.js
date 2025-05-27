@@ -75,15 +75,18 @@ function pesquisarComentario(req, res) {
 }
 
 function publicar(req, res) {
-    var comentario = req.body.comentario;
+    var titulo = req.body.titulo;
+    var conteudo = req.body.conteudo;
     var idUsuario = req.params.idUsuario;
 
     if (conteudo == undefined) {
         res.status(400).send("O conteúdo está indefinido!");
     } else if (idUsuario == undefined) {
         res.status(403).send("O id do usuário está indefinido!");
+    } else if (titulo == undefined) {
+        res.status(403).send("O título está indefinido!");
     } else {
-        dashboardModel.publicar(comentario, idUsuario)
+        dashboardModel.publicar(titulo, conteudo, idUsuario)
             .then(
                 function (resultado) {
                     res.json(resultado);
