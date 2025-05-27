@@ -9,7 +9,7 @@
     <script src="js/sessao.js"></script>
 </head>
 
-<body onload="validarSessao(), atualizarFeed()">
+<body onload="validarSessao(), listarRank()">
     <div class="navbar">
         <a href="index.html">Início</a>
         <a href="cadastro.html">Cadastro</a>
@@ -18,14 +18,18 @@
         <a class="active" href="dashboard.html">Dashboard</a>
     </div>
 
-    <div class="avisos">
-        <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
+    <div class="comentarios">
+        <h3>Olá, <span id="b_usuario"></span></h3>
         <div class="btn-logout" onclick="limparSessao()">
             <h3>Sair</h3>
         </div>
         <div id="alerta">
         </div>
         <div class="container">
+            <div id="div_ranking">
+                <div id="div_heroi"></div>
+                <div id="div_votos"></div>
+            </div>
             <h1>Comentar</h1>
             <div class="div-form">
                 <form id="form_postagem" method="post" onsubmit="return publicar()">
@@ -59,6 +63,27 @@
 
     b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
 
+    function listarRank() {
+        console.log("Executando função de listagem do rank");
+        fetch(`/dashboard/listarRank`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (response) {
+                    for (let i = 0; i < response.length; i++) {
+                        div_heroi.innerHTML += `${response[i].Herói} <br>`
+                        div_votos.innerHTML += `${response[i].Votos} votos <br>`
+                    }
+                })
+            }
+        }).catch(function (response) {
+            console.log(`#ERRO: ${response}`);
+        })
+    }
+
     function limparFormulario() {
         document.getElementById("form_postagem").reset();
     }
@@ -71,7 +96,7 @@
             descricao: form_postagem.descricao.value
         }
 
-        fetch(`/avisos/publicar/${idUsuario}`, {
+        fetch(`/dashboard/publicar/${idUsuario}`, {
             method: "post",
             headers: {
                 "Content-Type": "application/json"
@@ -85,7 +110,6 @@
                 window.alert("Post realizado com sucesso pelo usuario de ID: " + idUsuario + "!");
                 window.location = "/dashboard/dashboard.html";
                 limparFormulario();
-                finalizarAguardar();
             } else if (resposta.status == 404) {
                 window.alert("Deu 404!");
             } else {
@@ -93,30 +117,19 @@
             }
         }).catch(function (resposta) {
             console.log(`#ERRO: ${resposta}`);
-            finalizarAguardar();
         });
 
         return false;
-
-    }
-
-    function editar(idComentario) {
-        sessionStorage.ID_POSTAGEM_EDITANDO = idComentario;
-        console.log("cliquei em editar - " + idComentario);
-        window.alert("Você será redirecionado à página de edição do aviso de id número: " + idComentario);
-        window.location = "/dashboard/edicao-aviso.html"
-
     }
 
     function deletar(idComentario) {
         console.log("Criar função de apagar post escolhido - ID" + idComentario);
-        fetch(`/avisos/deletar/${idComentario}`, {
+        fetch(`/dashboard/deletar/${idComentario}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json"
             }
         }).then(function (resposta) {
-
             if (resposta.ok) {
                 window.alert("Post deletado com sucesso pelo usuario de email: " + sessionStorage.getItem("EMAIL_USUARIO") + "!");
                 window.location = "/dashboard/mural.html"
@@ -131,7 +144,8 @@
     }
 
     function atualizarFeed() {
-        fetch("/avisos/listar").then(function (resposta) {
+        fetch("/dashboard/listar").then(function (resposta) {
+            console.log(resposta)
             if (resposta.ok) {
                 if (resposta.status == 204) {
                     var feed = document.getElementById("feed_container");
@@ -156,7 +170,6 @@
                         var spanNome = document.createElement("span");
                         var divDescricao = document.createElement("div");
                         var divButtons = document.createElement("div");
-                        var btnEditar = document.createElement("button");
                         var btnDeletar = document.createElement("button");
 
 
@@ -192,15 +205,12 @@
                         divButtons.appendChild(btnDeletar);
                         feed.appendChild(divPublicacao);
                     }
-
-                    finalizarAguardar();
                 });
             } else {
                 throw ('Houve um erro na API!');
             }
         }).catch(function (resposta) {
             console.error(resposta);
-            finalizarAguardar();
         });
     }
 

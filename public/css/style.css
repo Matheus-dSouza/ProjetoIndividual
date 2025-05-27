@@ -144,3 +144,7 @@ a {
 }
 
 /* DASHBOARD */
+#div_ranking {
+    display: flex;
+    flex-direction: row;
+}
