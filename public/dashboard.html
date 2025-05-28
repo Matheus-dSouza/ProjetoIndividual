@@ -7,6 +7,7 @@
     <title>Dashboard</title>
     <link rel="stylesheet" href="../css/style.css">
     <script src="js/sessao.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 </head>
 
 <div class="navbar">
@@ -24,43 +25,68 @@
             <h3>Sair</h3>
         </div>
     </div>
-    <div id="div_ranking_titulo">Ranking de Heróis</div>
-    <div id="div_ranking">
-        <div id="div_heroi"></div>
-        <div id="div_votos"></div>
-    </div>
-    <div class="comentarios">
-        <div class="container">
-            <h1>Seção de Comentários</h1>
-            <div id="feed_container" class="feed-container">
+    <button onclick="alternarDashboard()" id="botaoAlternar">Seção de Comentários</button>
+    <div id="graficos">
+        <div id="ranking-main">
+            <p id="ranking_titulo">Ranking de Heróis</p>
+            <div id="div_ranking">
+                <div id="div_heroi"></div>
+                <div id="div_votos"></div>
             </div>
         </div>
-        <div class="div-form">
-            <h1>Comentar</h1>
-            <form id="form_postagem" method="post" onsubmit="return publicar()">
-                <label>
-                    Título do comentário:
-                    <br>
-                    <input name="titulo" id="titulo" maxlength="100" type="text">
-                </label>
-                <br>
-                <br>
-                <label>
-                    Conteúdo (máximo de 250 caracteres):
-                    <br>
-                    <textarea name="descricao" id="textarea_descricao" maxlength="250" rows="5"></textarea>
-                </label>
-                <br>
-                <br>
-                <button>Enviar</button>
-            </form>
+        <div id="pizza-main">
+            <p id="pizza-titulo">Top 5 heróis (por quantidade de votos)</p>
+            <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
         </div>
+    </div>
+    <div class="comentarios" id="comentarios">
+        <div class=" container">
+        <h1>Seção de Comentários</h1>
+        <div id="feed_container" class="feed-container">
+        </div>
+    </div>
+    <div class="div-form">
+        <h1>Comentar</h1>
+        <form id="form_postagem" method="post" onsubmit="return publicar()">
+            <label>
+                Título do comentário:
+                <br>
+                <input name="titulo" id="titulo" maxlength="100" type="text" autocomplete="false">
+            </label>
+            <br>
+            <br>
+            <label>
+                Conteúdo (máximo de 250 caracteres):
+                <br>
+                <textarea name="descricao" id="textarea_descricao" maxlength="250" rows="5"></textarea>
+            </label>
+            <br>
+            <br>
+            <button>Enviar</button>
+        </form>
+    </div>
     </div>
 </body>
 
 <script>
-
     b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+
+    function alternarDashboard() {
+        var comentariosDiv = document.getElementById("comentarios")
+        var graficosDiv = document.getElementById("graficos")
+        var botaoAlternarDashboard = document.getElementById("botaoAlternar")
+
+        if (comentariosDiv.style.display === 'none') {
+            comentariosDiv.style.display = 'flex'
+            graficosDiv.style.display = 'none'
+            botaoAlternarDashboard.innerHTML = `Ranking e Gráfico`
+        }
+        else {
+            comentariosDiv.style.display = 'none'
+            graficosDiv.style.display = 'flex'
+            botaoAlternarDashboard.innerHTML = `Seção de Comentários`
+        }
+    }
 
     function listarRank() {
         fetch(`/dashboard/listarRank`, {
@@ -73,8 +99,31 @@
                 response.json().then(function (response) {
                     for (let i = 0; i < response.length; i++) {
                         div_heroi.innerHTML += `${response[i].Herói} <br>`
-                        div_votos.innerHTML += `${response[i].Votos} votos <br>`
+                        if (response[i].Votos == 1 || response[i].Votos == 0) {
+                            div_votos.innerHTML += `${response[i].Votos} voto <br>`
+                        }
+                        else {
+                            div_votos.innerHTML += `${response[i].Votos} votos <br>`
+                        }
                     }
+                    var herois = []
+                    var votos = []
+                    var barColors = ["#201817", "#3e0909", "#675654", "#938582", "#ebdfd5"]
+                    for (let i = 0; i < 5; i++) {
+                        herois.push(response[i].Herói)
+                        votos.push(response[i].Votos)
+                    }
+                    const myChart = new Chart("myChart", {
+                        type: "pie",
+                        data: {
+                            labels: herois,
+                            datasets: [{
+                                data: votos,
+                                backgroundColor: barColors
+                            }]
+                        },
+                        options: {}
+                    });
                 })
             }
         }).catch(function (response) {

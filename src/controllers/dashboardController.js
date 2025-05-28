@@ -79,11 +79,11 @@ function publicar(req, res) {
     var conteudo = req.body.conteudo;
     var idUsuario = req.params.idUsuario;
 
-    if (conteudo == undefined) {
+    if (conteudo == undefined || conteudo == null || conteudo == '') {
         res.status(400).send("O conteúdo está indefinido!");
-    } else if (idUsuario == undefined) {
+    } else if (idUsuario == undefined || idUsuario == null || idUsuario == '') {
         res.status(403).send("O id do usuário está indefinido!");
-    } else if (titulo == undefined) {
+    } else if (titulo == undefined || titulo == null || titulo == '') {
         res.status(403).send("O título está indefinido!");
     } else {
         dashboardModel.publicar(titulo, conteudo, idUsuario)

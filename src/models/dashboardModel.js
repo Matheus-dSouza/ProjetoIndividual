@@ -5,7 +5,7 @@ function listarRank() {
     var instrucaoSql = `
     SELECT h.nome AS Herói, COUNT(u.id) AS Votos
     FROM usuario u
-    JOIN heroi h ON h.id = u.fkheroi
+    RIGHT JOIN heroi h ON h.id = u.fkheroi
     GROUP BY h.nome
     ORDER BY Votos DESC;
     `;

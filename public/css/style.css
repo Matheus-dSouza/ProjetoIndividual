@@ -167,7 +167,25 @@ a {
     background-color: #3e0909;
 }
 
-#div_ranking_titulo {
+#botaoAlternar {
+    width: 150px;
+    height: 50px;
+    border-radius: 15px;
+    font-size: 15px;
+    align-self: center;
+    font-family: "DwarvenAxe BB W00 Regular";
+    color: #ebdfd5;
+    background-color: #201817;
+}
+
+#ranking_titulo {
+    color: #ebdfd5;
+    font-family: "DwarvenAxe BB W00 Regular";
+    font-size: 25px;
+    align-self: center;
+}
+
+#pizza-titulo {
     color: #ebdfd5;
     font-family: "DwarvenAxe BB W00 Regular";
     font-size: 25px;
@@ -190,14 +208,44 @@ a {
     justify-content: space-evenly;
 }
 
-.comentarios {
+#graficos {
     display: flex;
+    flex-direction: row;
+    gap: 5vw;
+    justify-content: space-around;
+}
+
+#ranking-main {
+    display: flex;
+    flex-direction: column;
+    height: 40vh;
+    width: 30vw;
+    overflow: scroll;
+}
+
+.comentarios {
+    display: none;
     align-self: center;
-    justify-content: space-evenly;
+    justify-content: space-between;
+    margin-top: 5%;
+}
+
+.container {
+    margin-right: 200px;
 }
 
 #feed_container {
-    margin-top: 50px;
     overflow: scroll;
-    height: 100px;
+    height: 200px;
+    width: 400px;
+}
+
+#titulo {
+    background-color: #675654;
+    border-radius: 10px;
+}
+
+#textarea_descricao {
+    background-color: #675654;
+    border-radius: 5px;
 }
