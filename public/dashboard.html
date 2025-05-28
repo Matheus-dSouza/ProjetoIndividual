@@ -9,56 +9,51 @@
     <script src="js/sessao.js"></script>
 </head>
 
-<body onload="validarSessao(), listarRank(), atualizarFeed()" id="dashboard-body">
-    <div class="navbar">
-        <a href="index.html">Início</a>
-        <a href="cadastro.html">Cadastro</a>
-        <a href="#"><img id="navbar-icon"></a>
-        <a href="login.html">Login</a>
-        <a class="active" href="dashboard.html">Dashboard</a>
-    </div>
+<div class="navbar">
+    <a href="index.html">Início</a>
+    <a href="cadastro.html">Cadastro</a>
+    <a href="#"><img id="navbar-icon"></a>
+    <a href="login.html">Login</a>
+    <a class="active" href="dashboard.html">Dashboard</a>
+</div>
 
-    <div class="dashboard-main">
+<body onload="validarSessao(), listarRank(), atualizarFeed()" id="dashboard-body">
+    <div id="div-sessao">
         <h3>Olá, <span id="b_usuario"></span></h3>
         <div class="btn-logout" onclick="limparSessao()">
             <h3>Sair</h3>
         </div>
-        <div id="alerta">
-        </div>
-
-        <div id="div_ranking">
-            <div id="div_heroi"></div>
-            <div id="div_votos"></div>
-        </div>
-
-        <div class="comentarios">
-            <div class="container">
-                <h1>Comentar</h1>
-                <div class="div-form">
-                    <form id="form_postagem" method="post" onsubmit="return publicar()">
-                        <label>
-                            Título do comentário:
-                            <br>
-                            <input name="titulo" id="titulo" maxlength="100" type="text">
-                        </label>
-                        <br>
-                        <br>
-                        <label>
-                            Conteúdo (máximo de 250 caracteres):
-                            <br>
-                            <textarea name="descricao" id="textarea_descricao" maxlength="250" rows="5"></textarea>
-                        </label>
-                        <br>
-                        <br>
-                        <button>Enviar</button>
-                    </form>
-                </div>
-                <h1>Seção de Comentários</h1>
-                <div class="div-results">
-                    <div id="feed_container" class="feed-container">
-                    </div>
-                </div>
+    </div>
+    <div id="div_ranking_titulo">Ranking de Heróis</div>
+    <div id="div_ranking">
+        <div id="div_heroi"></div>
+        <div id="div_votos"></div>
+    </div>
+    <div class="comentarios">
+        <div class="container">
+            <h1>Seção de Comentários</h1>
+            <div id="feed_container" class="feed-container">
             </div>
+        </div>
+        <div class="div-form">
+            <h1>Comentar</h1>
+            <form id="form_postagem" method="post" onsubmit="return publicar()">
+                <label>
+                    Título do comentário:
+                    <br>
+                    <input name="titulo" id="titulo" maxlength="100" type="text">
+                </label>
+                <br>
+                <br>
+                <label>
+                    Conteúdo (máximo de 250 caracteres):
+                    <br>
+                    <textarea name="descricao" id="textarea_descricao" maxlength="250" rows="5"></textarea>
+                </label>
+                <br>
+                <br>
+                <button>Enviar</button>
+            </form>
         </div>
     </div>
 </body>
@@ -99,8 +94,6 @@
             conteudo: form_postagem.descricao.value
         }
 
-        console.log(idUsuario)
-
         fetch(`/dashboard/publicar/${idUsuario}`, {
             method: "post",
             headers: {
@@ -117,6 +110,7 @@
             } else {
                 throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
             }
+            atualizarFeed();
         }).catch(function (resposta) {
             console.log(`#ERRO: ${resposta}`);
         });
@@ -149,63 +143,18 @@
             console.log(resposta)
             if (resposta.ok) {
                 if (resposta.status == 204) {
-                    var feed = document.getElementById("feed_container");
-                    var mensagem = document.createElement("span");
-                    mensagem.innerHTML = "Nenhum resultado encontrado."
-                    feed.appendChild(mensagem);
                     throw "Nenhum resultado encontrado!!";
                 }
 
                 resposta.json().then(function (resposta) {
                     console.log("Dados recebidos: ", JSON.stringify(resposta));
+                    var feed = ``
 
-                    var feed = document.getElementById("feed_container");
-                    feed.innerHTML = "";
-                    for (let i = 0; i < resposta.length; i++) {
-                        var publicacao = resposta[i];
-
-                        // criando e manipulando elementos do HTML via JavaScript
-                        var divPublicacao = document.createElement("div");
-                        var spanID = document.createElement("span");
-                        var spanTitulo = document.createElement("span");
-                        var spanNome = document.createElement("span");
-                        var divDescricao = document.createElement("div");
-                        var divButtons = document.createElement("div");
-                        var btnDeletar = document.createElement("button");
-
-
-                        spanID.innerHTML = "ID: <b>" + publicacao.idComentario + "</b>";
-                        spanTitulo.innerHTML = "Título: <b>" + publicacao.titulo + "</b>";
-                        spanNome.innerHTML = "Autor: <b>" + publicacao.nome + "</b>";
-                        divDescricao.innerHTML = "Descrição: <b>" + publicacao.descricao + "</b>";
-                        btnEditar.innerHTML = "Editar";
-                        btnDeletar.innerHTML = "Deletar";
-
-                        divPublicacao.className = "publicacao";
-                        spanTitulo.id = "inputNumero" + publicacao.idComentario;
-                        spanNome.className = "publicacao-nome";
-                        spanTitulo.className = "publicacao-titulo";
-                        divDescricao.className = "publicacao-descricao";
-
-                        divButtons.className = "div-buttons"
-
-                        btnEditar.className = "publicacao-btn-editar"
-                        btnEditar.id = "btnEditar" + publicacao.idComentario;
-                        btnEditar.setAttribute("onclick", `editar(${publicacao.idComentario})`);
-
-                        btnDeletar.className = "publicacao-btn-editar"
-                        btnDeletar.id = "btnDeletar" + publicacao.idComentario;
-                        btnDeletar.setAttribute("onclick", `deletar(${publicacao.idComentario})`);
-
-                        divPublicacao.appendChild(spanID);
-                        divPublicacao.appendChild(spanNome);
-                        divPublicacao.appendChild(spanTitulo);
-                        divPublicacao.appendChild(divDescricao);
-                        divPublicacao.appendChild(divButtons);
-                        divButtons.appendChild(btnEditar);
-                        divButtons.appendChild(btnDeletar);
-                        feed.appendChild(divPublicacao);
+                    for (let i = resposta.length - 1; i >= 0; i--) {
+                        feed += `Comentário #${resposta[i].id} // Usuário: ${resposta[i].usuario} <br> ${resposta[i].conteudo} <br> <br>`
                     }
+
+                    feed_container.innerHTML = `${feed}`
                 });
             } else {
                 throw ('Houve um erro na API!');

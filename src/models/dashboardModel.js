@@ -15,8 +15,11 @@ function listarRank() {
 
 function listar() {
     var instrucaoSql = `
-    
-    `
+        SELECT c.id, c.titulo, c.conteudo, u.nome as usuario
+        FROM comentario c
+        INNER JOIN usuario u ON c.fkusuario = u.id;
+    `;
+    return database.executar(instrucaoSql);
 }
 
 function pesquisarComentario(texto) {
