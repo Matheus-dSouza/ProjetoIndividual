@@ -64,7 +64,7 @@
                 <br>
                 <button>Enviar</button>
             </form>
-            <form id="form_delete" method="delete" onsubmit="return deletar()">
+            <form id="form_delete" onsubmit="return deletar(event)">
                 <h1>Deletar</h1>
                 <label>
                     ID do comentário:
@@ -175,35 +175,11 @@
         return false;
     }
 
-    function deletar() {
-        var idUsuario = sessionStorage.ID_USUARIO;
-        var index = {
-            idComentario: form_delete.idComentario.value
-        }
-    
-        fetch(`/deletar/${idComentario}`, {
-            method: "delete",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(index)
-        }).then(function (resposta) {
-            if (resposta.ok) {
-                window.alert("Post deletado com sucesso pelo usuario de email: " + sessionStorage.getItem("EMAIL_USUARIO") + "!");
-            } else if (resposta.status == 404) {
-                window.alert("Deu 404!");
-            } else {
-                throw ("Houve um erro ao tentar deletar a postagem! Código da resposta: " + resposta.status);
-            }
-        }).catch(function (resposta) {
-            console.log(`#ERRO: ${resposta}`);
-        });
-    }
-
     function atualizarFeed() {
         fetch("/dashboard/listar").then(function (resposta) {
             if (resposta.ok) {
                 if (resposta.status == 204) {
+                    feed_container.innerHTML = ``
                     throw "Nenhum resultado encontrado!!";
                 }
 
@@ -224,6 +200,29 @@
         });
     }
 
+    function deletar(event) {
+        event.preventDefault();
+        var idComentario = form_delete.idComentario.value
+        var idUsuario = sessionStorage.ID_USUARIO;
+        fetch(`/dashboard/deletar/${idComentario}?idUsuario=${idUsuario}`, {
+            method: "delete",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(function (resposta) {
+            if (resposta.ok) {
+                window.alert("Post deletado com sucesso pelo usuario de email: " + sessionStorage.getItem("EMAIL_USUARIO") + "!");
+                atualizarFeed();
+            } else if (resposta.status == 404) {
+                window.alert("Deu 404!");
+            } else {
+                throw ("Houve um erro ao tentar deletar a postagem! Código da resposta: " + resposta.status);
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        });
+        return false;
+    }
 </script>
 
 </html>

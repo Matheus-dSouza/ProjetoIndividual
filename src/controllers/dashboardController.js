@@ -103,7 +103,7 @@ function publicar(req, res) {
 }
 
 function deletar(req, res) {
-    var idUsuario = req.params.idUsuario;
+    var idUsuario = req.query.idUsuario;
     var idComentario = req.params.idComentario;
 
     if (idComentario == undefined || idComentario == null || idComentario == '') {
@@ -113,7 +113,7 @@ function deletar(req, res) {
         res.status(400).send("O usuário está indefinido!");
     }
     else {
-        dashboardModel.deletar(idComentario)
+        dashboardModel.deletar(idComentario, idUsuario)
             .then(
                 function (resultado) {
                     res.json(resultado);
