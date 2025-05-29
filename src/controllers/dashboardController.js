@@ -103,21 +103,30 @@ function publicar(req, res) {
 }
 
 function deletar(req, res) {
+    var idUsuario = req.params.idUsuario;
     var idComentario = req.params.idComentario;
 
-    dashboardModel.deletar(idComentario)
-        .then(
-            function (resultado) {
-                res.json(resultado);
-            }
-        )
-        .catch(
-            function (erro) {
-                console.log(erro);
-                console.log("Houve um erro ao deletar o post: ", erro.sqlMessage);
-                res.status(500).json(erro.sqlMessage);
-            }
-        );
+    if (idComentario == undefined || idComentario == null || idComentario == '') {
+        res.status(400).send("O id do comentário está indefinido!");
+    }
+    else if (idUsuario == undefined || idUsuario == null || idUsuario == '') {
+        res.status(400).send("O usuário está indefinido!");
+    }
+    else {
+        dashboardModel.deletar(idComentario)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            )
+            .catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log("Houve um erro ao deletar o post: ", erro.sqlMessage);
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
 }
 
 module.exports = {

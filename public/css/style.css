@@ -1,4 +1,8 @@
-@import url(https://db.onlinewebfonts.com/c/11b9313c156261bdee0bc8b745b34450?family=DwarvenAxe+BB+W00+Regular); 
+/* @import url(https://db.onlinewebfonts.com/c/11b9313c156261bdee0bc8b745b34450?family=DwarvenAxe+BB+W00+Regular);  */
+@font-face {
+    font-family: "DwarvenAxe BB W00 Regular";
+    src: url(../assets/DwarvenAxe\ BB\ W00\ Regular.ttf);
+}
 
 body {
     margin: 0;
@@ -238,6 +242,7 @@ a {
     overflow: scroll;
     height: 200px;
     width: 400px;
+    font-size: 20px;
 }
 
 #titulo {
@@ -248,4 +253,15 @@ a {
 #textarea_descricao {
     background-color: #675654;
     border-radius: 5px;
+}
+
+.div-form {
+    display: flex;
+    flex-direction: row;
+    gap: 100px;
+}
+
+#idComentario {
+    background-color: #675654;
+    border-radius: 10px;
 }

@@ -41,42 +41,53 @@
     </div>
     <div class="comentarios" id="comentarios">
         <div class=" container">
-        <h1>Seção de Comentários</h1>
-        <div id="feed_container" class="feed-container">
+            <h1>Seção de Comentários</h1>
+            <div id="feed_container" class="feed-container">
+            </div>
         </div>
-    </div>
-    <div class="div-form">
-        <h1>Comentar</h1>
-        <form id="form_postagem" method="post" onsubmit="return publicar()">
-            <label>
-                Título do comentário:
+        <div class="div-form">
+            <form id="form_postagem" method="post" onsubmit="return publicar()">
+                <h1>Comentar</h1>
+                <label>
+                    Título do comentário:
+                    <br>
+                    <input name="titulo" id="titulo" maxlength="100" type="text">
+                </label>
                 <br>
-                <input name="titulo" id="titulo" maxlength="100" type="text" autocomplete="false">
-            </label>
-            <br>
-            <br>
-            <label>
-                Conteúdo (máximo de 250 caracteres):
                 <br>
-                <textarea name="descricao" id="textarea_descricao" maxlength="250" rows="5"></textarea>
-            </label>
-            <br>
-            <br>
-            <button>Enviar</button>
-        </form>
-    </div>
+                <label>
+                    Conteúdo (máximo de 250 caracteres):
+                    <br>
+                    <textarea name="descricao" id="textarea_descricao" maxlength="250" rows="5"></textarea>
+                </label>
+                <br>
+                <br>
+                <button>Enviar</button>
+            </form>
+            <form id="form_delete" method="delete" onsubmit="return deletar()">
+                <h1>Deletar</h1>
+                <label>
+                    ID do comentário:
+                    <br>
+                    <input name="idComentario" id="idComentario" type="number">
+                </label> <br> <br>
+                <button>Deletar</button>
+            </form>
+        </div>
     </div>
 </body>
 
 <script>
     b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
 
+    var comentariosDiv = document.getElementById("comentarios")
+    var graficosDiv = document.getElementById("graficos")
+    comentariosDiv.style.display = 'none'
+
     function alternarDashboard() {
-        var comentariosDiv = document.getElementById("comentarios")
-        var graficosDiv = document.getElementById("graficos")
         var botaoAlternarDashboard = document.getElementById("botaoAlternar")
 
-        if (comentariosDiv.style.display === 'none') {
+        if (comentariosDiv.style.display == 'none') {
             comentariosDiv.style.display = 'flex'
             graficosDiv.style.display = 'none'
             botaoAlternarDashboard.innerHTML = `Ranking e Gráfico`
@@ -137,7 +148,6 @@
 
     function publicar() {
         var idUsuario = sessionStorage.ID_USUARIO;
-
         var corpo = {
             titulo: form_postagem.titulo.value,
             conteudo: form_postagem.descricao.value
@@ -150,7 +160,6 @@
             },
             body: JSON.stringify(corpo)
         }).then(function (resposta) {
-            console.log(resposta);
             if (resposta.ok) {
                 window.alert("Post realizado com sucesso pelo usuario de ID: " + idUsuario + "!");
                 limparFormulario();
@@ -166,21 +175,25 @@
         return false;
     }
 
-    function deletar(idComentario) {
-        console.log("Criar função de apagar post escolhido - ID" + idComentario);
-        fetch(`/dashboard/deletar/${idComentario}`, {
-            method: "DELETE",
+    function deletar() {
+        var idUsuario = sessionStorage.ID_USUARIO;
+        var index = {
+            idComentario: form_delete.idComentario.value
+        }
+    
+        fetch(`/deletar/${idComentario}`, {
+            method: "delete",
             headers: {
                 "Content-Type": "application/json"
-            }
+            },
+            body: JSON.stringify(index)
         }).then(function (resposta) {
             if (resposta.ok) {
                 window.alert("Post deletado com sucesso pelo usuario de email: " + sessionStorage.getItem("EMAIL_USUARIO") + "!");
-                window.location = "/dashboard/mural.html"
             } else if (resposta.status == 404) {
                 window.alert("Deu 404!");
             } else {
-                throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
+                throw ("Houve um erro ao tentar deletar a postagem! Código da resposta: " + resposta.status);
             }
         }).catch(function (resposta) {
             console.log(`#ERRO: ${resposta}`);
@@ -189,18 +202,16 @@
 
     function atualizarFeed() {
         fetch("/dashboard/listar").then(function (resposta) {
-            console.log(resposta)
             if (resposta.ok) {
                 if (resposta.status == 204) {
                     throw "Nenhum resultado encontrado!!";
                 }
 
                 resposta.json().then(function (resposta) {
-                    console.log("Dados recebidos: ", JSON.stringify(resposta));
                     var feed = ``
 
                     for (let i = resposta.length - 1; i >= 0; i--) {
-                        feed += `Comentário #${resposta[i].id} // Usuário: ${resposta[i].usuario} <br> ${resposta[i].conteudo} <br> <br>`
+                        feed += `Comentário #${resposta[i].id} // Usuário: ${resposta[i].usuario} <br> Título: ${resposta[i].titulo} <br> ${resposta[i].conteudo} <br> <br>`
                     }
 
                     feed_container.innerHTML = `${feed}`
