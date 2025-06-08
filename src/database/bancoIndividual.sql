@@ -20,7 +20,8 @@ unique  key (email)
 
 create table comentario (
 id          int auto_increment,
-conteudo    varchar(120),
+conteudo    varchar(300),
+titulo      varchar(250),
 fkusuario   int,
 primary key (id),
 foreign key fkusuario (fkusuario) references usuario (id)

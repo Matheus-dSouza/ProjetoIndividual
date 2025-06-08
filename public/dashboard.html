@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Fórum</title>
     <link rel="stylesheet" href="../css/style.css">
     <script src="js/sessao.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
@@ -15,7 +15,7 @@
     <a href="cadastro.html">Cadastro</a>
     <a href="#"><img id="navbar-icon"></a>
     <a href="login.html">Login</a>
-    <a class="active" href="dashboard.html">Dashboard</a>
+    <a class="active" href="dashboard.html">Fórum</a>
 </div>
 
 <body onload="validarSessao(), listarRank(), atualizarFeed()" id="dashboard-body">
@@ -35,17 +35,16 @@
             </div>
         </div>
         <div id="pizza-main">
-            <p id="pizza-titulo">Top 5 heróis (por quantidade de votos)</p>
             <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
         </div>
     </div>
-    <div class="comentarios" id="comentarios">
-        <div class=" container">
+    <div id="comentarios">
+        <div class="container">
             <h1>Seção de Comentários</h1>
             <div id="feed_container" class="feed-container">
             </div>
         </div>
-        <div class="div-form">
+        <div class="dashboard-form">
             <form id="form_postagem" method="post" onsubmit="return publicar()">
                 <h1>Comentar</h1>
                 <label>
@@ -58,9 +57,8 @@
                 <label>
                     Conteúdo (máximo de 250 caracteres):
                     <br>
-                    <textarea name="descricao" id="textarea_descricao" maxlength="250" rows="5"></textarea>
+                    <div contenteditable="true" name="descricao" id="textarea_descricao" maxlength="250" rows="5"></div>
                 </label>
-                <br>
                 <br>
                 <button>Enviar</button>
             </form>
@@ -108,6 +106,7 @@
         }).then(function (response) {
             if (response.ok) {
                 response.json().then(function (response) {
+                    console.log(response)
                     for (let i = 0; i < response.length; i++) {
                         div_heroi.innerHTML += `${response[i].Herói} <br>`
                         if (response[i].Votos == 1 || response[i].Votos == 0) {
@@ -132,8 +131,7 @@
                                 data: votos,
                                 backgroundColor: barColors
                             }]
-                        },
-                        options: {}
+                        }
                     });
                 })
             }
@@ -211,7 +209,6 @@
             }
         }).then(function (resposta) {
             if (resposta.ok) {
-                window.alert("Post deletado com sucesso pelo usuario de email: " + sessionStorage.getItem("EMAIL_USUARIO") + "!");
                 atualizarFeed();
             } else if (resposta.status == 404) {
                 window.alert("Deu 404!");

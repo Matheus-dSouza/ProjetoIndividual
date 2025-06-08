@@ -8,26 +8,22 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 
-<div class="navbar">
-    <a href="index.html">Início</a>
-    <a class="active" href="cadastro.html">Cadastro</a>
-    <a href="#"><img id="navbar-icon"></a>
-    <a href="login.html">Login</a>
-    <a href="dashboard.html">Dashboard</a>
-</div>
 
 <body>
-    <div class="alerta_erro">
-        <div class="card_erro" id="cardErro">
-            <span id="mensagem_erro"></span>
-        </div>
+    <div class="navbar">
+        <a href="index.html">Início</a>
+        <a class="active" href="cadastro.html">Cadastro</a>
+        <a href="#"><img id="navbar-icon"></a>
+        <a href="login.html">Login</a>
+        <a href="dashboard.html">Fórum</a>
     </div>
-
-    <div class="cadastro-main">
-        <div class="block3">
-            <img id="cadastro-ancestor">
+    <div class="block3">
+        <div class="alerta_erro">
+            <div class="card_erro" id="cardErro">
+                <span id="mensagem_erro"></span>
+            </div>
         </div>
-        <div class="block4">
+        <div class="cadastro-form">
             <label for="ipt_nome_cadastro">Digite seu nome:</label> <br>
             <input type="text" id="ipt_nome_cadastro"> <br>
             <label for="ipt_email_cadastro">Digite seu email:</label> <br>
@@ -54,13 +50,9 @@
                 <option value="16">Plague Doctor</option>
                 <option value="17">Shieldbreaker</option>
                 <option value="18">Vestal</option>
-            </select> <br> <br>
+            </select>
             <button onclick="cadastrar()">Cadastrar</button>
         </div>
-    </div>
-
-    <div id="div_aguardar" class="loading-div">
-        <img src="assets/circle-loading.gif" id="loading-gif" />
     </div>
 </body>
 
@@ -69,16 +61,11 @@
 <script>
 
     function cadastrar() {
-        // aguardar();
-
-        //Recupere o valor da nova input pelo nome do id
-        // Agora vá para o método fetch logo abaixo
         var nomeVar = ipt_nome_cadastro.value;
         var emailVar = ipt_email_cadastro.value;
         var senhaVar = ipt_senha_cadastro.value;
         var heroiVar = ipt_heroi_cadastro.value;
 
-        // Verificando se há algum campo em branco
         if (
             nomeVar == "" ||
             emailVar == "" ||
@@ -93,15 +80,12 @@
             setInterval(sumirMensagem, 5000);
         }
 
-        // Enviando o valor da nova input
         fetch("/usuarios/cadastrar", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                // crie um atributo que recebe o valor recuperado aqui
-                // Agora vá para o arquivo routes/usuario.js
                 nomeServer: nomeVar,
                 emailServer: emailVar,
                 senhaServer: senhaVar,

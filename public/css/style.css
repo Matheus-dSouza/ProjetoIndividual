@@ -8,11 +8,40 @@ body {
     margin: 0;
 }
 
+input {
+    background-color: #675654;
+    border-radius: 5px;
+    border-color: #201817;
+    font-size: 20px;
+    color: #ebdfd5;
+    text-shadow: 2px 2px #201817;
+}
+
+select {
+    background-color: #675654;
+    border-radius: 5px;
+    border-color: #201817;
+    font-family: "DwarvenAxe BB W00 Regular";
+    font-size: 25px;
+    color: #ebdfd5;
+    text-shadow: 2px 2px #201817;
+}
+
+button {
+    background-color: #675654;
+    border-radius: 5px;
+    border-color: #201817;
+    font-family: "DwarvenAxe BB W00 Regular";
+    font-size: 25px;
+    color: #ebdfd5;
+    text-shadow: 2px 2px #201817;
+}
+
 /* NAVBAR */
 
 .navbar {
-    position:sticky;
-    top:0;
+    position: sticky;
+    top: 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -26,13 +55,14 @@ body {
 
 a {
     font-family: "DwarvenAxe BB W00 Regular";
-    font-size: 25px;
-    color: black;
+    font-size: 30px;
+    color: #ebdfd5;
+    text-shadow: 2px 2px #201817;
     text-decoration: none;
 }
 
 .active {
-    color: #ebdfd5;
+    color: #CE9C46;
 }
 
 #navbar-icon {
@@ -43,121 +73,186 @@ a {
 
 /* INDEX */
 
-.index-main {
-    display: flex;
-    flex-direction: column;
-    background-color: #3e0909;
-}
-
-.index-hamlet {
-    width: 50vw;
-    height: 10vh;
-}
-
-.index-stage {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.index-text {
-    font-family: "DwarvenAxe BB W00 Regular";
-    color: #ebdfd5;
-    text-shadow: 2px 2px black;
-}
-
-.index-text.top {
-    font-size: 35px;
-    align-self: center;
-}
-
-.index-text.middle {
-    padding-top: 10%;
-    padding-bottom: 20%;
-    font-size: 25px;
-    align-self: center;
-    text-align: center;
-}
-
-.index-text.hamlet {
-    font-size: 35px;
-    padding-top: 10%;
-    padding-left: 5%;
-    padding-right: 5%;
-}
-
-.index-text.hamlet-small {
-    font-size: 25px;
-    padding-left: 5%;
-    padding-right: 5%;
-}
-
 .block1 {
     display: flex;
-    background-image: url(/assets/dd-hamlet-broken.png);
+    align-items: center;
+    justify-content: space-evenly;
+    background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0) 80%, rgba(0, 0, 0, 1) 100%), url(../assets/dd-hamlet-broken.png);
+    background-image: -moz-linear-gradient(rgba(0, 0, 0, 0) 80%, rgba(0, 0, 0, 1) 100%), url(../assets/dd-hamlet-broken.png);
+    background-image: -o-linear-gradient(rgba(0, 0, 0, 0) 80%, rgba(0, 0, 0, 1) 100%), url(../assets/dd-hamlet-broken.png);
+    background-image: linear-gradient(rgba(0, 0, 0, 0) 80%, rgba(0, 0, 0, 1) 100%), url(../assets/dd-hamlet-broken.png);
     background-size: cover;
+    background-position: center;
     background-repeat: no-repeat;
-    padding-bottom: 45%;
+    width: 100vw;
+    height: calc(100vh - 96.4px);
 }
 
 .block2 {
     display: flex;
-    padding-right: 12%;
-    justify-content: space-between;
-    background-image: url(/assets/dd-ruins.png);
+    align-items: center;
+    justify-content: space-evenly;
+    background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0) 100%, rgba(0, 0, 0, 1) 80%), url(../assets/dd-battlestage.png);
+    background-image: -moz-linear-gradient(rgba(0, 0, 0, 0) 100%, rgba(0, 0, 0, 1) 80%), url(../assets/dd-battlestage.png);
+    background-image: -o-linear-gradient(rgba(0, 0, 0, 0) 100%, rgba(0, 0, 0, 1) 80%), url(../assets/dd-battlestage.png);
+    background-image: linear-gradient(rgba(0, 0, 0, 0) 100%, rgba(0, 0, 0, 1) 80%), url(../assets/dd-battlestage.png);
     background-size: cover;
+    background-position: center;
     background-repeat: no-repeat;
-    padding-top: 100px;
+    width: 100vw;
+    height: calc(100vh - 96.4px);
 }
 
-.index-button {
-    width: 60%;
-    height: 10%;
+.hamlet1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.40);
+    border-radius: 15px;
+    width: 30%;
+    height: 40%;
+    text-align: center;
+}
+
+.hamlet2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.40);
+    border-radius: 15px;
+    width: 30%;
+    height: 40%;
+    text-align: center;
+}
+
+.hamlet3 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10%;
+    margin-right: 15%;
+    background-color: rgba(0, 0, 0, 0.40);
+    border-radius: 15px;
+    width: 30%;
+    height: 40%;
+    text-align: center;
+}
+
+h1 {
+    font-family: "DwarvenAxe BB W00 Regular";
+    color: #ebdfd5;
+    font-size: 30px;
+    text-shadow: 2px 2px #201817;
+}
+
+
+p {
+    font-family: "DwarvenAxe BB W00 Regular";
+    color: #ebdfd5;
+    font-size: 20px;
+    text-shadow: 2px 2px #201817;
+}
+
+
+.battlestage-text {
+    font-family: "DwarvenAxe BB W00 Regular";
+    color: #ebdfd5;
+    text-shadow: 2px 2px #201817;
+    font-size: 25px;
+    font-size: 25px;
 }
 
 #index-necromancer {
     content: url(/assets/dd-necromancer.gif);
-    padding-right: 4%;
+    height: 80%;
+    padding-top: 8%;
 }
 
 #index-vestal {
     content: url(/assets/dd-vestal-combat.gif);
-    padding-left: 10%;
-    padding-top: 110px;
-    padding-bottom: 15px;
+    height: 65%;
+    padding-top: 14%;
 }
 
 #index-crusader {
     content: url(/assets/dd-crusader-combat.gif);
-    padding-bottom: 15px;
-    padding-left: 4%;
+    height: 85%;
+    padding-top: 6%;
 }
 
 /* CADASTRO */
 
-.cadastro-main {
+.block3 {
     display: flex;
     flex-direction: column;
-    background-color: #3e0909;
+    background-image: url(../assets/dd-circus-entrance.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     width: 100vw;
-    height: 100vh;
-    align-items: center;
+    height: calc(100vh - 96.4px);
     font-family: "DwarvenAxe BB W00 Regular";
     color: #ebdfd5;
+    font-size: 40px;
+    text-shadow: 2px 2px #201817;
+    align-items: center;
+    justify-content: center;
+}
+
+.cadastro-form {
+    display: flex;
+    flex-direction: column;
+    font-size: 40px;
+    align-items: center;
+    justify-content: center;
+    gap: 1%;
+    width: 25vw;
+    height: 50vh;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.45);
 }
 
 /* LOGIN */
 
-.login-main {
+.block5 {
     display: flex;
-    flex-direction: column;
-    background-color: #3e0909;
+    background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0) 80%, rgba(0, 0, 0, 1) 100%), url(../assets/dd-party.png);
+    background-image: -moz-linear-gradient(rgba(0, 0, 0, 0) 80%, rgba(0, 0, 0, 1) 100%), url(../assets/dd-party.png);
+    background-image: -o-linear-gradient(rgba(0, 0, 0, 0) 80%, rgba(0, 0, 0, 1) 100%), url(../assets/dd-party.png);
+    background-image: linear-gradient(rgba(0, 0, 0, 0) 80%, rgba(0, 0, 0, 1) 100%), url(../assets/dd-party.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     width: 100vw;
-    height: 100vh;
-    align-items: center;
+    height: calc(100vh - 96.4px);
     font-family: "DwarvenAxe BB W00 Regular";
     color: #ebdfd5;
+    text-shadow: 2px 2px #201817;
+    flex-direction: row;
+    gap: 10%;
+    align-items: center;
+    justify-content: center;
+}
+
+#login-announcer {
+    content: url(../assets/dd-townevent.webp);
+    height: 60vh;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3%;
+    height: 35vh;
+    width: 20vw;
+    font-size: 40px;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.45);
 }
 
 
@@ -167,15 +262,21 @@ a {
     display: flex;
     flex-direction: column;
     color: #ebdfd5;
+    text-shadow: 2px 2px #201817;
     font-family: "DwarvenAxe BB W00 Regular";
     background-color: #3e0909;
+    background-image: url(../assets/dd-all.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    align-items: center;
+    justify-content: center;
 }
 
 #botaoAlternar {
     width: 150px;
     height: 50px;
     border-radius: 15px;
-    font-size: 15px;
+    font-size: 20px;
     align-self: center;
     font-family: "DwarvenAxe BB W00 Regular";
     color: #ebdfd5;
@@ -184,24 +285,27 @@ a {
 
 #ranking_titulo {
     color: #ebdfd5;
+    font-size: 25px;
+    text-shadow: 2px 2px #201817;
     font-family: "DwarvenAxe BB W00 Regular";
     font-size: 25px;
     align-self: center;
 }
 
-#pizza-titulo {
-    color: #ebdfd5;
-    font-family: "DwarvenAxe BB W00 Regular";
-    font-size: 25px;
-    align-self: center;
+#pizza-main {
+    margin-top: 5%;
+    width: 30vw;
+    height: 20vh;
+    padding-bottom: 17%;    
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.45);
 }
 
 #div-sessao {
     display: flex;
     flex-direction: row;
-    gap: 15px;
     font-size: 25px;
-    justify-content: space-evenly;
+    gap: 100px;
 }
 
 #div_ranking {
@@ -219,23 +323,35 @@ a {
     justify-content: space-around;
 }
 
+.container {
+    background-color: rgba(0, 0, 0, 0.45);
+    border-radius: 10px;
+}
+
 #ranking-main {
     display: flex;
     flex-direction: column;
-    height: 40vh;
-    width: 30vw;
-    overflow: scroll;
-}
-
-.comentarios {
-    display: none;
-    align-self: center;
-    justify-content: space-between;
     margin-top: 5%;
+    height: 40vh;
+    width: 25vw;
+    overflow: scroll;
+    border-radius: 10px;
+    padding-bottom: 2%;
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
-.container {
-    margin-right: 200px;
+#comentarios {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10%;
+}
+
+.dashboard-form {
+    display: flex;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
 }
 
 #feed_container {
@@ -253,15 +369,26 @@ a {
 #textarea_descricao {
     background-color: #675654;
     border-radius: 5px;
+    height: 100px;
 }
 
-.div-form {
-    display: flex;
-    flex-direction: row;
-    gap: 100px;
-}
 
 #idComentario {
     background-color: #675654;
     border-radius: 10px;
+}
+
+#form_postagem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+#form_delete {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 28.5%;
+    gap: 10px;
 }
