@@ -35,7 +35,7 @@
             </div>
         </div>
         <div id="pizza-main">
-            <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+            <canvas id="myChart" width="100px" height="100px"></canvas>
         </div>
     </div>
     <div id="comentarios">
@@ -131,6 +131,29 @@
                                 data: votos,
                                 backgroundColor: barColors
                             }]
+                        },
+                        options: {
+                            layout: {
+                                padding: {
+                                    bottom: 170,
+                                    left: 50,
+                                    right: 50
+                                }
+                            },
+                            title: {
+                                display: true,
+                                text: 'Heróis mais populares',
+                                fontSize: 25,
+                                fontFamily: "DwarvenAxe BB W00 Regular",
+                                fontColor: '#ebdfd5'
+                            },
+                            legend: {
+                                labels: {
+                                    fontColor: '#ebdfd5',
+                                    fontSize: 18,
+                                    fontFamily: "DwarvenAxe BB W00 Regular"
+                                }
+                            }
                         }
                     });
                 })
